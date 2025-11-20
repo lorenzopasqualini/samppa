@@ -8,7 +8,7 @@ export default function App() {
     <div className="app-shell">
       <ThemeToggle />
       <header className="app-header">
-        <h1 className="app-title">Holiday & PTO Planner</h1>
+        <h1 className="app-title">SAMPPA</h1>
       </header>
       <main className="grid">
         <div className="grid-col">

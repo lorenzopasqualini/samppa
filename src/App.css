@@ -1,39 +1,50 @@
 /* Theme variables */
-/* Light theme (default) */
+/* Light theme (earthy variant to mirror dark mode accents) */
 :root {
-  --bg: linear-gradient(135deg, #f5f9ff 0%, #e2ecf9 60%, #d6e4f5 100%);
-  --surface: #ffffff;
-  --surface-alt: #f1f5fb;
-  --border: rgba(0, 0, 0, 0.08);
+  /* Warm, soft neutral gradient inspired by dark palette lightened */
+  --bg: linear-gradient(135deg, #f4ede3 0%, #e8ddcf 55%, #dbcdbb 100%);
+  --surface: #fcf8f2; /* Card background */
+  --surface-alt: #f5eee5; /* Inputs / subtle surfaces */
+  --border: rgba(58, 51, 41, 0.15); /* Warm neutral border */
   --radius-sm: 6px;
   --radius: 12px;
   --gap: 1.2rem;
-  --text: #0d1b2e;
-  --text-muted: #4d647d;
-  --accent: #2563eb;
-  --accent-grad: linear-gradient(90deg, #3b82f6, #60a5fa);
-  --shadow: 0 4px 12px -4px rgba(0, 0, 0, 0.15),
-    0 2px 4px -1px rgba(0, 0, 0, 0.12);
-  --font-stack: system-ui, -apple-system, Segoe UI, Roboto, Ubuntu, sans-serif;
+  --text: #3a2f25; /* Deep warm brown for main text */
+  --text-muted: #7e6d5d; /* Muted mid-tone */
+  --accent: #a48352; /* Match dark mode accent for consistency */
+  --accent-grad: linear-gradient(90deg, #b18658, #c09666); /* Earthy golden gradient */
+  --shadow: 0 4px 12px -4px rgba(0, 0, 0, 0.12),
+    0 2px 4px -1px rgba(0, 0, 0, 0.08);
+  /* List item translucent backgrounds for light mode */
+  --list-item-bg: rgba(58, 51, 41, 0.06);
+  --list-item-hover: rgba(58, 51, 41, 0.12);
 }
 /* Dark theme overrides */
 .dark {
-  --bg: linear-gradient(135deg, #101728 0%, #1c2f4d 60%, #22395b 100%);
-  --surface: #1e2d45;
-  --surface-alt: #243954;
-  --border: rgba(255, 255, 255, 0.08);
-  --text: #f5f8ff;
-  --text-muted: #b6c2d6;
-  --accent: #5aa9ff;
-  --accent-grad: linear-gradient(90deg, #5aa9ff, #8ec5ff);
-  --shadow: 0 4px 12px -4px rgba(0, 0, 0, 0.4),
-    0 2px 4px -1px rgba(0, 0, 0, 0.3);
+  /* Earthy dark palette */
+  --bg: linear-gradient(135deg, #1a140e 0%, #2a241d 55%, #3a3329 100%);
+  /* Cards will be transparent, keep surfaces transparent */
+  --surface: transparent;
+  --surface-alt: transparent;
+  --border: rgba(255, 255, 255, 0.12);
+  --text: #f2e9dd;
+  --text-muted: #b3a89c;
+  /* Subtle, desaturated accent only for non-card UI (title/button) */
+  --accent: #a48352;
+  --accent-grad: linear-gradient(90deg, #8b6f47, #a48352);
+  --shadow: 0 4px 14px -6px rgba(0, 0, 0, 0.55),
+    0 2px 6px -2px rgba(0, 0, 0, 0.4);
+  /* Preserve original translucent white overlays for dark mode list items */
+  --list-item-bg: rgba(255, 255, 255, 0.035);
+  --list-item-hover: rgba(255, 255, 255, 0.06);
 }
 
 html,
 body,
 #root {
   height: 100%;
+  margin: auto;
+  font-family: "Cal Sans", sans-serif;
 }
 body {
   background: var(--bg);
@@ -44,6 +55,11 @@ body {
   font-family: var(--font-stack);
   -webkit-font-smoothing: antialiased;
   transition: background 0.35s ease, color 0.35s ease;
+}
+h1,
+footer{
+	font-family: "Instrument Serif", serif;
+	font-weight: 900;
 }
 
 .app-shell {
@@ -58,12 +74,13 @@ body {
 .app-header {
   display: flex;
   align-items: center;
-  justify-content: space-between;
+  justify-content: right;
   gap: 1rem;
 }
 .app-title {
   font-size: clamp(1.6rem, 4vw, 2.4rem);
   background: var(--accent-grad);
+  background-clip: text;
   -webkit-background-clip: text;
   color: transparent;
   font-weight: 600;
@@ -101,6 +118,7 @@ body {
 
 /* Card base */
 .card {
+  /* Transparent card style for dark theme; still fine in light */
   background: var(--surface);
   border: 1px solid var(--border);
   border-radius: var(--radius);
@@ -116,11 +134,8 @@ body {
   content: '';
   position: absolute;
   inset: 0;
-  background: radial-gradient(
-    circle at 120% 0%,
-    rgba(255, 255, 255, 0.05),
-    transparent 60%
-  );
+  /* Soft vignette only when not fully transparent in light mode */
+  background: radial-gradient(circle at 120% 0%, rgba(255, 255, 255, 0.04), transparent 65%);
   pointer-events: none;
 }
 .card.subtle {
@@ -134,6 +149,9 @@ body {
   font-size: 1.15rem;
   font-weight: 600;
   letter-spacing: 0.5px;
+}
+h1,h2,h3,span,footer{
+	pointer-events: none;
 }
 
 /* Lists */
@@ -154,13 +172,13 @@ body {
   align-items: center;
   gap: 0.5rem;
   padding: 0.55rem 0.75rem;
-  background: rgba(255, 255, 255, 0.035);
-  border: 1px solid rgba(255, 255, 255, 0.05);
+  background: var(--list-item-bg);
+  border: 1px solid var(--border);
   border-radius: var(--radius-sm);
   font-size: 0.85rem;
 }
 .list-item:hover {
-  background: rgba(255, 255, 255, 0.06);
+  background: var(--list-item-hover);
 }
 
 .holiday-name {
@@ -212,7 +230,8 @@ body {
   font-weight: 600;
   letter-spacing: 1px;
   text-transform: uppercase;
-  color: var(--accent);
+  /* Remove accent color inside cards */
+  color: var(--text-muted);
 }
 
 .plan-item {
@@ -229,10 +248,12 @@ body {
   color: var(--text-muted);
 }
 .plan-pto {
-  color: #ffd677;
+  /* Neutralized accent */
+  color: var(--text-muted);
 }
 .plan-range {
-  color: #9ac8ff;
+  /* Neutralized accent */
+  color: var(--text-muted);
 }
 
 .empty {
@@ -243,7 +264,7 @@ body {
 /* Button refinement */
 .btn {
   background: var(--accent-grad);
-  color: #0d1b2e;
+  color: #2d241b; /* Dark warm text for contrast on gradient */
   font-weight: 600;
   border: none;
   padding: 0.7rem 1.1rem;
@@ -264,7 +285,7 @@ body {
 
 .app-footer {
   margin-top: 1.5rem;
-  font-size: 0.65rem;
+  font-size: 0.8rem;
   letter-spacing: 1px;
   text-transform: uppercase;
   text-align: center;
@@ -274,7 +295,7 @@ body {
 /* Theme toggle button */
 .theme-toggle {
   position: fixed;
-  top: 0.75rem;
+  bottom: 0.75rem;
   right: 0.75rem;
   width: 2.4rem;
   height: 2.4rem;
