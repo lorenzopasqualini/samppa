@@ -61,7 +61,11 @@ function SpainHolidayPlanner() {
       <div className="input-row">
         <label className="field">
           <span className="field-label">PTO days left</span>
-          <input className="input" type="number" value={ptoDays} onChange={e=>setPtoDays(e.target.value)} min="0" />
+          <select className="input" value={ptoDays} onChange={e=>setPtoDays(e.target.value)}>
+            {Array.from({length: 31}, (_,i)=>i).map(n => (
+              <option key={n} value={n}>{n}</option>
+            ))}
+          </select>
         </label>
       </div>
       <div className="suggestions">
