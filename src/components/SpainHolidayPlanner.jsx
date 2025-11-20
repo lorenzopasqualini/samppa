@@ -38,6 +38,7 @@ function SpainHolidayPlanner() {
         const weekendEnd = new Date(weekendStart);
         weekendEnd.setDate(weekendStart.getDate() + (dow === 2 ? 3 : 3));
         out.push({
+          id: h.id || (h.startDate + '-' + (h.name?.[0]?.text || 'Holiday')),
           holiday: h.startDate,
           holidayName: h.name?.[0]?.text || 'Holiday',
           pto: ptoDate.toISOString().slice(0,10),
@@ -75,7 +76,7 @@ function SpainHolidayPlanner() {
             <h3 className="month-heading">{month}</h3>
             <ul className="list compact">
               {list.map(s => (
-                <li key={s.holiday} className="list-item plan-item">
+                <li key={s.id || s.holiday} className="list-item plan-item">
                   <span className="plan-name">{s.holidayName}</span>
                   <span className="plan-date">{s.holiday}</span>
                   <span className="plan-pto">Take {s.pto}</span>
