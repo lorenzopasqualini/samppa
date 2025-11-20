@@ -64,7 +64,6 @@ body {
 .grid {
   display: grid;
   gap: var(--gap);
-  grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
   align-items: start;
 }
 .grid-col {
@@ -252,6 +251,12 @@ body {
   text-transform: uppercase;
   text-align: center;
   color: var(--text-muted);
+}
+
+@media (min-width: 1024px) {
+  .grid {
+    grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+  }
 }
 
 @media (max-width: 640px) {

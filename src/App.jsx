@@ -10,10 +10,10 @@ export default function App() {
       </header>
       <main className="grid">
         <div className="grid-col">
-          <SpainHolidays />
+          <SpainHolidayPlanner />
         </div>
         <div className="grid-col">
-          <SpainHolidayPlanner />
+          <SpainHolidays />
         </div>
       </main>
       <footer className="app-footer">Plan smarter. Rest better.</footer>
