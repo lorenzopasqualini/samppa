@@ -1,19 +1,33 @@
 /* Theme variables */
+/* Light theme (default) */
 :root {
+  --bg: linear-gradient(135deg, #f5f9ff 0%, #e2ecf9 60%, #d6e4f5 100%);
+  --surface: #ffffff;
+  --surface-alt: #f1f5fb;
+  --border: rgba(0, 0, 0, 0.08);
+  --radius-sm: 6px;
+  --radius: 12px;
+  --gap: 1.2rem;
+  --text: #0d1b2e;
+  --text-muted: #4d647d;
+  --accent: #2563eb;
+  --accent-grad: linear-gradient(90deg, #3b82f6, #60a5fa);
+  --shadow: 0 4px 12px -4px rgba(0, 0, 0, 0.15),
+    0 2px 4px -1px rgba(0, 0, 0, 0.12);
+  --font-stack: system-ui, -apple-system, Segoe UI, Roboto, Ubuntu, sans-serif;
+}
+/* Dark theme overrides */
+.dark {
   --bg: linear-gradient(135deg, #101728 0%, #1c2f4d 60%, #22395b 100%);
   --surface: #1e2d45;
   --surface-alt: #243954;
   --border: rgba(255, 255, 255, 0.08);
-  --radius-sm: 6px;
-  --radius: 12px;
-  --gap: 1.2rem;
   --text: #f5f8ff;
   --text-muted: #b6c2d6;
   --accent: #5aa9ff;
   --accent-grad: linear-gradient(90deg, #5aa9ff, #8ec5ff);
   --shadow: 0 4px 12px -4px rgba(0, 0, 0, 0.4),
     0 2px 4px -1px rgba(0, 0, 0, 0.3);
-  --font-stack: system-ui, -apple-system, Segoe UI, Roboto, Ubuntu, sans-serif;
 }
 
 html,
@@ -26,6 +40,7 @@ body {
   color: var(--text);
   font-family: var(--font-stack);
   -webkit-font-smoothing: antialiased;
+  transition: background 0.35s ease, color 0.35s ease;
 }
 
 .app-shell {
@@ -251,6 +266,38 @@ body {
   text-transform: uppercase;
   text-align: center;
   color: var(--text-muted);
+}
+
+/* Theme toggle button */
+.theme-toggle {
+  position: fixed;
+  top: 0.75rem;
+  right: 0.75rem;
+  width: 2.4rem;
+  height: 2.4rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--surface);
+  color: var(--text);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-sm);
+  cursor: pointer;
+  box-shadow: var(--shadow);
+  font-size: 1.15rem;
+  transition: background 0.2s, transform 0.2s;
+  z-index: 100;
+}
+.theme-toggle:hover {
+  background: var(--surface-alt);
+  transform: translateY(-2px);
+}
+.theme-toggle:active {
+  transform: translateY(0);
+}
+.theme-toggle:focus {
+  outline: 2px solid var(--accent);
+  outline-offset: 2px;
 }
 
 @media (min-width: 1024px) {
