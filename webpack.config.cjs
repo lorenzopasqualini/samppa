@@ -8,7 +8,13 @@ module.exports = {
      filename: 'bundle.js',
      path: path.resolve(__dirname, 'dist'),
      clean: true,
-   },
+    },
+    devtool: 'inline-source-map',
+    devServer: {
+      static: './dist',
+      compress: true,
+      port: 9000,
+    },
    plugins: [
     new HtmlWebpackPlugin({
       template: './index.html',
